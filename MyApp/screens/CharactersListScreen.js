@@ -41,7 +41,7 @@ export default function CharactersListScreen({navigation}) {
                 <View style={styles.item}>
                     <TouchableOpacity 
                     activeOpacity={0.8}
-                    onPress={()=> navigation.navigate('CharacterDetails', {item})}
+                    onPress={()=> navigation.navigate('CharactersDetails', {item})}
                     >
                         <Image style={styles.img} source={{uri: item.image}} />
                         <View>
