@@ -9,9 +9,9 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Characters List">
-        <Stack.Screen name="Characters List" component={CharactersListScreen} options={{headerShow: true, title: ' ', headerStyle :{backgroundColor: 'rgba(7, 43, 89, 1)', height: 0}}}/>
-        <Stack.Screen name="Characters Details" component={CharactersDetailsScreen}/>
+      <Stack.Navigator initialRouteName="CharactersList">
+        <Stack.Screen name="CharactersList" component={CharactersListScreen} options={{headerShow: true, title: ' ', headerStyle :{backgroundColor: 'rgba(7, 43, 89, 1)', height: 0}}}/>
+        <Stack.Screen name="CharactersDetails" component={CharactersDetailsScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

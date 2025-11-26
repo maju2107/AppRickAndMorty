@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList,StyleSheet,Alert,View, Text, Image, Dimensions, ActivityIndicator} from 'react-native';
+import {FlatList,StyleSheet,Alert,View, Text, Image, Dimensions, ActivityIndicator,TouchableOpacity} from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -39,12 +39,17 @@ export default function CharactersListScreen({navigation}) {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({item}) => (
                 <View style={styles.item}>
-                    <Image style={styles.img} source={{uri: item.image}} />
-                    <View>
-                        <Text style={styles.text}>{item.name}</Text> 
-                        <Text style={styles.text}>{item.species}</Text>
-                        <Text style={styles.text}>{item.status}</Text>
-                    </View>
+                    <TouchableOpacity 
+                    activeOpacity={0.8}
+                    onPress={()=> navigation.navigate('CharacterDetails', {item})}
+                    >
+                        <Image style={styles.img} source={{uri: item.image}} />
+                        <View>
+                            <Text style={styles.text}>{item.name}</Text> 
+                            <Text style={styles.text}>{item.species}</Text>
+                            <Text style={styles.text}>{item.status}</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             )}
         />
