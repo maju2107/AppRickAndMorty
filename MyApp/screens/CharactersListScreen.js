@@ -32,7 +32,7 @@ export default function CharactersListScreen({navigation}) {
 
     return(
         <View style={styles.back}>
-        <Text style={styles.title}>Personagens de Rick e Morty</Text>
+        <Text style={styles.title}>Rick and Morty's characters</Text>
         <FlatList
             data={character}
             horizontal
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
         paddingHorizontal:4
     },
     img: {
-        width:width*0.5,
-        height:height*0.5,
+        width:width*0.1,
+        height:height*0.2,
         marginRight:10,
         borderRadius:5
 
