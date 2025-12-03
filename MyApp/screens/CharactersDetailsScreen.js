@@ -10,8 +10,10 @@ export default function CharactersDetailsScreen({route}) {
         <Text>{item.name}</Text>
         <Text>{item.species}</Text>
         <Text>{item.status}</Text>
+        <Text>{item.gender}</Text>
+        <Text>{item.location.name}</Text>
+        <Text>{item.origin.name}</Text>
         </View>
     );
-
     
 }
