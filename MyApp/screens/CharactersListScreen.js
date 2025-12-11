@@ -5,30 +5,54 @@ const { width, height } = Dimensions.get('window');
 
 export default function CharactersListScreen({navigation}) {
 
-    const [character, setcharacter] = useState([]); // armazenar os dados da Api
-    const [loading, setLoading] = useState(true); // controlar o estado do carregamento
+    const endpoint = 'https://rickandmortyapi.com/api/character';
 
-    useEffect(() => {
-        const endpoint = 'https://rickandmortyapi.com/api/character';
+    const [character, setcharacter] = useState([]); // armazenar os dados da Api
+    const [loadingInitial, setLoadingInitial] = useState(true); // controlar o estado do carregamento
+    const [loading, setLoading] = useState(false); 
+    const [nextPage, setNextPage] = useState(endpoint);
+
+    useEffect(() => { // fetch = buscar 
         fetch(endpoint)
             .then(res => res.json())
             .then(json => {
                 setcharacter(json.results);  
-                setLoading(false);
+                setNextPage(json.info.next); // atualiza a próxima página
+                setLoadingInitial(false);
             })
             .catch(() => {
                 Alert.alert('Erro', 'Não foi possível carregar os personagens!');
-                setLoading(false);
+                setLoadingInitial(false);
             });
     },[]);
 
-    if(loading) {
+    if(loadingInitial) {
         return(
             <View style={styles.fundo}>
                 <ActivityIndicator size="large" color="#fff"/>
             </View>
         );
     }
+
+    const infinityPage = async() => {
+        if (!nextPage || loading ) return; // evitar chamadas duplicadas
+        setLoading(true);
+        try {
+            const response = await fetch(nextPage);
+            const json = await response.json();
+
+            setcharacter(prevData => [...prevData, ...json.results]); // adicionar novos personagens
+             
+            setNextPage(json.info.next); 
+
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Erro, não foi possível carregar a próxima página de personagens!');
+            
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return(
         <View style={styles.back}>
@@ -37,6 +61,9 @@ export default function CharactersListScreen({navigation}) {
             data={character}
             horizontal
             keyExtractor={(item) => item.id.toString()}
+            onEndReached={infinityPage}
+            onEndReachedThreshold={0.8} // 80% já chama a outra página
+            ListFooterComponent={ loading ? <ActivityIndicator size="small" color="#000"/> : null} // carregamento no singelo no footer
             renderItem={({item}) => (
                 <View style={styles.item}>
                     <TouchableOpacity 
