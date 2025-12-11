@@ -10,8 +10,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="CharactersList">
-        <Stack.Screen name="CharactersList" component={CharactersListScreen} options={{headerShow: true, title: ' ', headerStyle :{backgroundColor: 'rgba(7, 43, 89, 1)', height: 0}}}/>
-        <Stack.Screen name="CharactersDetails" component={CharactersDetailsScreen}/>
+        <Stack.Screen name="CharactersList" component={CharactersListScreen} options={{headerShow: true, title: ' ', headerStyle :{backgroundColor: '#97ce4c', height: 0}}}/>
+        <Stack.Screen name="CharactersDetails" component={CharactersDetailsScreen} options={{headerStyle :{backgroundColor: 'rgba(177, 205, 232, 1)'}, title: ' Characters  Details'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

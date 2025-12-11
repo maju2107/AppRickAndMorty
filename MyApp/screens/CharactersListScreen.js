@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList,StyleSheet,Alert,View, Text, Image, Dimensions, ActivityIndicator,TouchableOpacity} from 'react-native';
 
+
 const { width, height } = Dimensions.get('window');
 
 export default function CharactersListScreen({navigation}) {
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#97ce4c'
     },
     title: {
-        fontSize:40,
+        fontSize:50,
         marginBottom:15,
         marginTop: 40,
         color: 'black'
@@ -106,12 +107,11 @@ const styles = StyleSheet.create({
         height:height*0.2,
         marginRight:10,
         borderRadius:5
-
     },
     text: {
         fontSize:20,
         fontWeight:'bold',
-        color: '#44281d'
+        color: '#44281d',
     }
 
 });
