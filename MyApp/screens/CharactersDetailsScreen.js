@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {FlatList,StyleSheet,TouchableOpacity,Alert,View, Text, Image, Dimensions} from 'react-native';
+import React from 'react';
+import {StyleSheet,View, Text, Image} from 'react-native';
 import img from '../assets/img.png';
 
 export default function CharactersDetailsScreen({route}) {

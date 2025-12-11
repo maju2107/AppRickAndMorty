@@ -9,7 +9,7 @@ export default function CharactersListScreen({navigation}) {
     const endpoint = 'https://rickandmortyapi.com/api/character';
 
     const [character, setcharacter] = useState([]); // armazenar os dados da Api
-    const [loadingInitial, setLoadingInitial] = useState(true); // controlar o estado do carregamento
+    const [loadingInitial, setLoadingInitial] = useState(true); // controlar o estado do carregamento inicial
     const [loading, setLoading] = useState(false); 
     const [nextPage, setNextPage] = useState(endpoint);
 
@@ -35,14 +35,14 @@ export default function CharactersListScreen({navigation}) {
         );
     }
 
-    const infinityPage = async() => {
-        if (!nextPage || loading ) return; // evitar chamadas duplicadas
+    const infinitePage = async() => {
+        if (!nextPage || loading ) return; // evita chamadas duplicadas
         setLoading(true);
         try {
             const response = await fetch(nextPage);
             const json = await response.json();
 
-            setcharacter(prevData => [...prevData, ...json.results]); // adicionar novos personagens
+            setcharacter(prevData => [...prevData, ...json.results]); // adiciona novos personagens
              
             setNextPage(json.info.next); 
 
@@ -62,9 +62,9 @@ export default function CharactersListScreen({navigation}) {
             data={character}
             horizontal
             keyExtractor={(item) => item.id.toString()}
-            onEndReached={infinityPage}
-            onEndReachedThreshold={0.8} // 80% já chama a outra página
-            ListFooterComponent={ loading ? <ActivityIndicator size="small" color="#000"/> : null} // carregamento no singelo no footer
+            onEndReached={infinitePage}
+            onEndReachedThreshold={0.8} // 80% visto já chama a outra página
+            ListFooterComponent={ loading ? <ActivityIndicator size="small" color="#000"/> : null} // carregamento singelo no footer
             renderItem={({item}) => (
                 <View style={styles.item}>
                     <TouchableOpacity 
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize:20,
         fontWeight:'bold',
-        color: '#44281d',
+        color: '#44281d'
     }
 
 });
